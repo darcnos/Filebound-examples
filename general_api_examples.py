@@ -29,7 +29,7 @@ def get_file_template():
 
 def get_doc_template():
     """Requests and returns a document template dictionary"""
-    return json.loads(requests.get('https://{}/api/empty?template=file'.format(siteurl)).text)
+    return json.loads(requests.get('https://{}/api/empty?template=document'.format(siteurl)).text)
 
 
 def query_file(keyfield):
