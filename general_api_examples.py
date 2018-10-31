@@ -44,6 +44,9 @@ def query_file(keyfield):
             print('Found the file!')
             download_documents(current_dir + '/download_documents', contents, keyfield)
 
+    else:
+        print('Error when requesting contents from {}'.format(siteurl))
+
 
 def download_documents(download_path, contents, keyfield):
     """Reads and saves out the documents from the response of a file query"""
