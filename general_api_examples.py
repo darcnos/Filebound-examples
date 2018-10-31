@@ -48,9 +48,10 @@ def query_file(keyfield):
 
 def download_documents(download_path, contents, keyfield):
     """Reads and saves out the documents from the response of a file query"""
+    if not os.path.exists(download_path):
+        os.makedirs(download_path)
     for document in contents[0]['files']['collection'][0]['documents']['collection']:        
-        if not os.path.exists(download_path):
-            os.makedirs(download_path)
+
             
         binaryData = base64.b64decode(document['binaryData'])
         documentId = document['documentId']
