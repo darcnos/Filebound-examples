@@ -6,7 +6,6 @@ siteurl = input('https://')
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
 
-
 def login(siteurl):
     """Logs into the site and returns a GUID"""
     u = input('Username: ')
@@ -72,13 +71,11 @@ def upload_documents(directory_to_upload):
     post_file_string = 'https://{}/api/projects/25/files?guid={}'
     post_doc_string = 'https://{}/api/documents/{}?guid={}'
 
-
     #Find all files in a directory
     filelist = [filename for filename in glob.glob(directory_to_upload + '/\*.*')]
     print(filelist)
 
     for file in filelist:
-
         #Create a copy of the FileBound file and document templates
         file_temp = file_template.copy()
         doc_temp = doc_template.copy()
@@ -103,12 +100,11 @@ def upload_documents(directory_to_upload):
             #This string is either for a new fileId, or the fileId of an existing file based on merge rules
             if not r.status_code == 200:
                 print('error POSTing to file')
-            else:
 
+            else:
                 fileId = r.text
 
-                #Fill the document template with binaryData, the mimetype, a divider (optional)
-                #and set it to allow the data be saved to the site
+                #Fill the document template with binaryData, the mimetype, a divider (optional), and the save status
                 doc_temp['binaryData'] = binaryData
                 doc_temp['extension'] = ext
                 doc_temp['divider'] = 'my_divider'
@@ -122,7 +118,6 @@ def upload_documents(directory_to_upload):
                 #If the POST is successful, the newly created documentId will be the response
                 print(docpost_r.text)
     return True
-
 
 
 if __name__ == '__main__':
@@ -139,4 +134,3 @@ if __name__ == '__main__':
 
     #Upload the files in current_directory's 'upload_documents' folder    
     upload_documents(current_dir + '/upload_documents/')
-
