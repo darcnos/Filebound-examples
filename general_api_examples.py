@@ -40,6 +40,7 @@ def query_file(keyfield):
         
         if contents[0]['files']['totalCount'] == 0:
             print('No file found.')
+
         else:
             print('Found the file!')
             download_documents(current_dir + '/download_documents', contents, keyfield)
