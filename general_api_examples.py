@@ -43,7 +43,7 @@ def query_file(keyfield):
         else:
             print('Found the file!')
             download_documents(current_dir + '/download_documents', contents, keyfield)
-
+            
     else:
         print('Error when requesting contents from {}'.format(siteurl))
 
@@ -53,7 +53,7 @@ def download_documents(download_path, contents, keyfield):
     if not os.path.exists(download_path):
         os.makedirs(download_path)
 
-    for document in contents[0]['files']['collection'][0]['documents']['collection']:        
+    for document in contents[0]['files']['collection'][0]['documents']['collection']:
         binaryData = base64.b64decode(document['binaryData'])
         documentId = document['documentId']
         extension = document['extension']
