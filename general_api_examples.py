@@ -2,7 +2,7 @@
 import base64, requests, json, os, glob
 
 fbheaders = {'content-type': 'application/json'}
-siteurl = input('https://')
+siteurl = 'https://' + input('https://')
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
 
@@ -16,24 +16,24 @@ def login(siteurl):
         'password': p
     }
 
-    login = 'https://{}/api/login'.format(siteurl)
+    login = '{}/api/login'.format(siteurl)
     r = requests.post(login, data)
     return r.json()
 
 
 def get_file_template():
     """Requests and returns a file template dictionary"""
-    return json.loads(requests.get('https://{}/api/empty?template=file'.format(siteurl)).text)
+    return json.loads(requests.get('{}/api/empty?template=file'.format(siteurl)).text)
 
 
 def get_doc_template():
     """Requests and returns a document template dictionary"""
-    return json.loads(requests.get('https://{}/api/empty?template=document'.format(siteurl)).text)
+    return json.loads(requests.get('{}/api/empty?template=document'.format(siteurl)).text)
 
 
 def query_file(keyfield):
     """Using the keyfield, find a file and return its listing of documents"""
-    r = requests.get('https://{}/api/query/projectId_25/F1_{}/divider_/binaryData?guid={}'.format(siteurl, keyfield, guid))
+    r = requests.get('{}/api/query/projectId_25/F1_{}/divider_/binaryData?guid={}'.format(siteurl, keyfield, guid))
 
     if r.status_code == 200:
         contents = r.json()
@@ -72,8 +72,8 @@ def upload_documents(directory_to_upload):
     on the file's keyfield"""
 
     #New file Post string, this example uses projectId 25
-    post_file_string = 'https://{}/api/projects/25/files?guid={}'
-    post_doc_string = 'https://{}/api/documents/{}?guid={}'
+    post_file_string = '{}/api/projects/25/files?guid={}'
+    post_doc_string = '{}/api/documents/{}?guid={}'
 
     #Find all files in a directory
     filelist = [filename for filename in glob.glob(directory_to_upload + '/\*.*')]
